@@ -3,9 +3,7 @@ package com.apirest.Api_Rest.service;
 import com.apirest.Api_Rest.model.Alumno;
 import com.apirest.Api_Rest.repositories.Alumno_Repositorio;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -26,6 +24,11 @@ public class Alumno_Servicio {
 
     public Alumno saveAlumno(Alumno alumno) {
         return alumno_Repositorio.save(alumno);
+    }
+
+    public List<Alumno> findByNombre (String name) {
+        return alumno_Repositorio.findAll().stream().filter
+                (alumno -> alumno.getNombre().equals(name)).toList();
     }
 
     public void deleteAlumno(Long id) {

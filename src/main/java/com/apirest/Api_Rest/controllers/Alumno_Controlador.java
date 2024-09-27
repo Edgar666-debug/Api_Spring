@@ -25,6 +25,11 @@ public class Alumno_Controlador {
         return alumno_Servicio.getAlumnos();
     }
 
+    @GetMapping("/alumnos/{name}")
+    public List<Alumno> getAlumnoByName(@PathVariable String name) {
+        return alumno_Servicio.findByNombre(name);
+    }
+
     @GetMapping("/{id}")
     public Alumno getAlumno(@PathVariable Long id) {
         return alumno_Servicio.getAlumno(id);
