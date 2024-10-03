@@ -10,22 +10,22 @@ import java.util.List;
 @CrossOrigin
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/alumnos")
 public class Alumno_Controlador {
 
     private final Alumno_Servicio alumno_Servicio;
 
-    @GetMapping( )
+    @GetMapping( "/")
     public String index() {
         return "Conectado";
     }
 
-    @GetMapping("/alumnos")
+    @GetMapping("")
     public List<Alumno> listAlumnos() {
         return alumno_Servicio.getAlumnos();
     }
 
-    @GetMapping("/alumnos/{name}")
+    @GetMapping("/consultar/{name}")
     public List<Alumno> getAlumnoByName(@PathVariable String name) {
         return alumno_Servicio.findByNombre(name);
     }
