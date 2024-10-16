@@ -10,7 +10,7 @@ import java.util.List;
 @CrossOrigin
 @AllArgsConstructor
 @RestController
-@RequestMapping("/alumnos")
+@RequestMapping("/api/v1/alumnos")
 public class Alumno_Controlador {
 
     private final Alumno_Servicio alumno_Servicio;

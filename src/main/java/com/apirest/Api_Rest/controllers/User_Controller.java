@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class User_Controller {
 
-    @PostMapping("/auth")
+    @PostMapping("/insert")
     public String login() {
         return "Conectado";
     }
