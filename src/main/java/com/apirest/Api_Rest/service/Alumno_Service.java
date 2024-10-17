@@ -1,7 +1,7 @@
 package com.apirest.Api_Rest.service;
 
 import com.apirest.Api_Rest.model.Alumno;
-import com.apirest.Api_Rest.repositories.Alumno_Repositorio;
+import com.apirest.Api_Rest.repositories.IAlumno_Repository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +9,9 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class Alumno_Servicio {
+public class Alumno_Service {
 
-    private final Alumno_Repositorio alumno_Repositorio;
+    private final IAlumno_Repository alumno_Repositorio;
 
     public List<Alumno> getAlumnos() {
         return alumno_Repositorio.findAll();

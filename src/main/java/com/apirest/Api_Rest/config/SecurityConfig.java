@@ -32,20 +32,20 @@ import java.util.List;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf(crsf -> crsf.disable())
-                .httpBasic(Customizer.withDefaults())
-                .sessionManagement(session -> session.sessionCreationPolicy
-                        (SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(http ->
-                {
-                    //Endpoint permitidos para usuarios autenticados
-                    http.requestMatchers(HttpMethod.GET, "/api/v1/alumnos").permitAll();
-                    //Endpoint permitidos para administradores
-                    http.requestMatchers(HttpMethod.GET, "/api/v1/alumnos/consultar/{name}")
-                            .hasAuthority("CREATE");
-                    http.anyRequest().denyAll();
-                }).build();
+    SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+         httpSecurity
+                .cors(Customizer.withDefaults())
+                .csrf(crsf -> crsf.disable())
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/alumnos/**").permitAll()
+                        .requestMatchers("/api/v1/user/**").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .sessionManagement((session) -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                );
+        return httpSecurity.build();
     }
 
     @Bean
@@ -53,7 +53,7 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    @Bean
+   /* @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService());
@@ -67,7 +67,7 @@ public class SecurityConfig {
         userList.add(User.withUsername("admin")
                 .password("admin")//passwordEncoder().encode("admin")
                 .roles("ADMIN")
-                        .authorities("READ", "CREATE")
+                        .authorities("READ", "CREATE", "UPDATE", "DELETE")
                 .build());
         userList.add(User.withUsername("user")
                 .password("user")//passwordEncoder().encode("user")
@@ -75,7 +75,7 @@ public class SecurityConfig {
                 .roles("USER")
                 .build());
         return new InMemoryUserDetailsManager(userList);
-    }
+    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder() {

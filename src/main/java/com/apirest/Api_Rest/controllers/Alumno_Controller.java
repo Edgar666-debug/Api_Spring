@@ -1,19 +1,18 @@
 package com.apirest.Api_Rest.controllers;
 
-import com.apirest.Api_Rest.service.Alumno_Servicio;
+import com.apirest.Api_Rest.service.Alumno_Service;
 import com.apirest.Api_Rest.model.Alumno;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/alumnos")
-public class Alumno_Controlador {
+public class Alumno_Controller {
 
-    private final Alumno_Servicio alumno_Servicio;
+    private final Alumno_Service alumno_Servicio;
 
     @GetMapping( "/")
     public String index() {
