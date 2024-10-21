@@ -14,14 +14,14 @@ public class CorsConfig {
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuratio = new CorsConfiguration();
-        configuratio.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-        configuratio.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        configuratio.setAllowedHeaders(Arrays.asList("*"));
-        configuratio.setAllowCredentials(true);
-        configuratio.setMaxAge(3600L);
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuratio);
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 }

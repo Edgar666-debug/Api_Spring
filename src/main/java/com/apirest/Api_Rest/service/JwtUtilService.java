@@ -15,7 +15,7 @@ import java.util.function.Function;
 @Service
 public class JwtUtilService {
 
-    private static final String JWY_SECRET_KEY = "759715795b808075643c36bb0c5d369435956e3b8287bfc3676260baf10bfffd";
+    private static final String JWY_SECRET_KEY = "TExBVkVfTVVZX1NFQ1JFVEzE3Zmxu7BSGSJx72BSBXM";
     private static final long JWT_TOKEN_VALIDITY = 1000 * 60 * 15;
 
     public String generateToken(UserDetails userDetails) {
