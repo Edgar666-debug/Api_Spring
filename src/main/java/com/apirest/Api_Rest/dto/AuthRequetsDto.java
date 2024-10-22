@@ -8,5 +8,6 @@ public class AuthRequetsDto {
 
      String email;
      String password;
+     String rol;
 
 }

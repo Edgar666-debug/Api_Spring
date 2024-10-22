@@ -17,14 +17,28 @@ public class JwtUtilService {
 
     private static final String JWY_SECRET_KEY = "TExBVkVfTVVZX1NFQ1JFVEzE3Zmxu7BSGSJx72BSBXM";
     private static final long JWT_TOKEN_VALIDITY = 1000 * 60 * 15;
+    private static final long JWT_REFRESH_TOKEN_VALIDITY = 1000 * 60 * 60 * 24;
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails, String role) {
         var claims = new HashMap<String, Object>();
+        claims.put("role", role);
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY))
+                .signWith( SignatureAlgorithm.HS256, JWY_SECRET_KEY)
+                .compact();
+    }
+
+    public String generateRefreshToken(UserDetails userDetails, String role) {
+        var claims = new HashMap<String, Object>();
+        claims.put("role", role);
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + JWT_REFRESH_TOKEN_VALIDITY))
                 .signWith( SignatureAlgorithm.HS256, JWY_SECRET_KEY)
                 .compact();
     }
